@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+    <head>
+        <meta charset="UTF-8">
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+            rel="stylesheet">
+
+        <link rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+
+        <link rel="stylesheet" href="/style.css">
+
+        <title>Adm</title>
+    </head>
+
+    <body>
+        <nav>
+            <ul>
+                <li>
+                    <span class="material-icons">music_note</span>
+                </li>
+
+                <li>
+                    <a href="/"><i class="bi bi-box-arrow-right"></i></a>
+                </li>
+            </ul>
+        </nav>
+
+        <section id="add">
+            <h2>Cadastrar nova música</h2>
+
+            <form action="/create" method="post">
+
+                <label>Nome da Música :</label>
+                <input type="text" name="name" id="name">
+
+                <label>Autor da Música :</label>
+                <input type="text" name="author" id="author">
+
+                <label>Capa :</label>
+                <input type="text" name="linkImage" id="linkImage">
+
+                <label>Música</label>
+                <input type="text" name="linkMusic" id="linkMusic">
+
+                <button type="submit">Cadastrar</button>
+            </form>
+        </section>
+
+        <section id="player">
+            <h2>Gerenciar músicas</h2>
+
+            <div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Nome</th>
+                            <th>Artista</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% playlist.forEach((music) => { %>
+
+                        <tr class="musics">
+                            <td><img src="<%= music.linkImage %>"
+                                    alt="Imagem da musica"></td>
+
+                            <td><%= music.name %></td>
+
+                            <td><%= music.author %></td>
+
+                            <td id="actions">
+                                <a id="edit"
+                                    href="/by/<%= music._id %>/edit">Editar</a>
+
+                                <a id="delete"
+                                    href="/by/<%= music._id %>/delete">Apagar</a>
+                            </td>
+                        </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <% if (music != null) { %>
+
+        <section id="modal">
+            <div id="card">
+                <a id="close-modal" href="/admin"><i class="bi bi-x-lg"></i></a>
+
+                <h2>Editar Musica</h2>
+                <hr>
+
+                <form id="form-modal" method="post"
+                    action="/update/<%= music._id %>">
+
+                    <label for="name">Nome:</label>
+                    <input type="text" name="name" id="name"
+                        value="<%= music.name %>">
+
+                    <label for="author">Autor:</label>
+                    <input type="text" name="author" id="author"
+                        value="<%= music.author %>">
+
+                    <label for="linkImage">Link da Imagem:</label>
+                    <input type="text" name="linkImage" id="linkImage"
+                        value="<%= music.linkImage %>">
+
+                    <label for="linkMusic">Link da Música:</label>
+                    <input type="text" name="linkMusic" id="linkMusic"
+                        value="<%= music.linkMusic %>">
+
+                    <button type="submit">Atualizar</button>
+                </form>
+            </div>
+        </section>
+        <% } %>
+
+        <% if (musicDel != null) { %>
+
+        <section id="modal">
+            <div id="card">
+                <a id="close-modal" href="/admin"><i class="bi bi-x-lg"></i></a>
+
+                <h2>Confirmar</h2>
+
+                <hr>
+
+                <p>Deseja realmente apagar a música <%= musicDel.name %> ?</p>
+
+                <div id="btn-confirm">
+                    <a id="no" href="/admin">Não</a>
+
+                    <a id="yes" href="/delete/<%= musicDel._id %>">Sim</a>
+                </div>
+            </div>
+        </section>
+        <% } %>
+    </body>
+
+</html>
+
+<!--
+A página admin.ejs serve como interface para o administrador gerenciar as músicas na aplicação.
+ Ela permite ao usuário adicionar novas músicas através de um formulário, exibir a lista de músicas já cadastradas, e realizar ações como editar ou apagar músicas. A
+ página interage com as rotas da API definidas no index.js, permitindo que as operações de CRUD (Create, Read, Update, Delete) sejam executadas de forma amigável.
+
+Relação com outras páginas:
+O formulário de cadastro de música envia dados para a rota /create, que no back-end insere esses dados no banco de dados.
+A lista de músicas exibida é obtida através da variável playlist, que é populada no back-end ao buscar as músicas do banco.
+Os links de edição e exclusão chamam as rotas /by/:id/edit e /by/:id/delete, respectivamente, para renderizar as interfaces de edição e confirmação de exclusão.
+
+-->
