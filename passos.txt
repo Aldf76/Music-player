@@ -1,0 +1,31 @@
+1 - iniciar o projeto -> npm init
+2 - instalar o express -> npm i express
+3 - instalar o pacote do node modules -> npm i que estão mapeados no packge-lock
+4 - instalar o nodemon -> npm i nodemon
+5 - instalar o path -> npm i path
+===== ejs - wiew ====
+instalar o ejs -> npm install ejs
+===== comandos npm mongoose =====
+1º  -> npm install mongoose
+
+npm uninstall mongoose  
+npm install mongoose@6.10.0 -> instalar a version para não ocorrer o erro.
+6º  -> npm install dotenv
+
+Dreams -> nome da musica
+
+Benjamin Tissot -> autor
+
+https://www.bensound.com/bensound-music/bensound-dreams.mp3 -> link da musica
+
+https://cdn.bensound.com/image/cover/dreams-thumb.webp -> link da imagem
+
+/////////////////////////////////
+
+Unbreakable Resolve
+
+Lunar Years
+
+https://www.bensound.com/bensound-music/bensound-unbreakableresolve.mp3
+
+https://cdn.bensound.com/image/cover/lunaryears-digging.webp
